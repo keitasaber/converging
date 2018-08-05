@@ -299,24 +299,6 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Converging.Common\Converging.Common.csproj">
-      <Project>{90a4b32b-44bd-4392-b526-ba398664938f}</Project>
-      <Name>Converging.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Converging.Data\Converging.Data.csproj">
-      <Project>{7dec0648-4250-46fe-a1da-453fa5ff4045}</Project>
-      <Name>Converging.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Converging.Model\Converging.Model.csproj">
-      <Project>{f7b91a65-bc52-4450-a8be-71f8f844bd52}</Project>
-      <Name>Converging.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Converging.Service\Converging.Service.csproj">
-      <Project>{1cb4ef36-f138-4527-b604-7a46568e00ee}</Project>
-      <Name>Converging.Service</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
