@@ -1,4 +1,6 @@
 ﻿using Converging.Infrastructure.Core;
+using Converging.Mappings;
+using Converging.Models;
 using Converging.Service;
 using System;
 using System.Collections.Generic;
@@ -27,7 +29,8 @@ namespace Converging.Api
             return CreateHttpResponse(requestMessage, () =>
             {
                 var listProductCategory = _productCategorySevice.GetAll().ToList();
-                HttpResponseMessage responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, listProductCategory);
+                var listProductCategoryViewModel = AutoMapperConfiguration.Mapping.Map<List<ProductCategoryViewModel>>(listProductCategory);
+                HttpResponseMessage responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, listProductCategoryViewModel);
                 return responseMessage;
             });
         }

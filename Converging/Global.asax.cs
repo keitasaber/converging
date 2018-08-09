@@ -1,4 +1,5 @@
 ﻿using Converging.App_Start;
+using Converging.Mappings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace Converging
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutoMapperConfiguration.RegisterAutoMappers();
         }
     }
 }
