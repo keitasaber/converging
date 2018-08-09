@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Converging.Data.Infrastructure
 {
-    class DbFactory : IDbFactory
+    public class DbFactory : IDbFactory
     {
         private ConveringDbContext dbContext;
 
