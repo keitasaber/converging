@@ -1,6 +1,8 @@
-namespace Converging.Data.Migrations
+﻿namespace Converging.Data.Migrations
 {
+    using Converging.Model.Models;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -18,6 +20,22 @@ namespace Converging.Data.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+
+            CreateProductCategoriesSample(context);
+        }
+
+        private void CreateProductCategoriesSample(Converging.Data.ConveringDbContext context)
+        {
+            List<ProductCategory> listProductCategory = new List<ProductCategory>
+            {
+                new ProductCategory(){ Name="Lập trình", Alias = "lap-trinh", Status = true},
+                new ProductCategory(){ Name="Thiết kế", Alias = "thiet-ke", Status = true},
+                new ProductCategory(){ Name="CV", Alias = "cv", Status = true},
+                new ProductCategory(){ Name="Ngoại ngữ", Alias = "ngoai-ngu", Status = true}
+            };
+
+            context.ProductCategories.AddRange(listProductCategory);
+            context.SaveChanges();
         }
     }
 }

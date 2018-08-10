@@ -211,6 +211,16 @@
     <Content Include="app\components\products\productEditView.html" />
     <Content Include="app\components\products\productListController.js" />
     <Content Include="app\components\products\productListView.html" />
+    <Content Include="app\components\product_categories\productCategoryAddController.js" />
+    <Content Include="app\components\product_categories\productCategoryAddView.html" />
+    <Content Include="app\components\product_categories\productCategoryEditController.js" />
+    <Content Include="app\components\product_categories\productCategoryEditView.html" />
+    <Content Include="app\components\product_categories\productCategoryListController.js" />
+    <Content Include="app\components\product_categories\productCategoryListView.html" />
+    <Content Include="app\components\product_categories\productCateogries.module.js" />
+    <Content Include="app\shared\filters\statusFilter.js" />
+    <Content Include="app\shared\serivces\apiService.js" />
+    <Content Include="Assets\Admin\css\font-style.css" />
     <Content Include="Assets\Admin\css\style.css" />
     <Content Include="Assets\Admin\images\dashboard\circle.svg" />
     <Content Include="Assets\Admin\images\dashboard\img_1.jpg" />
@@ -288,8 +298,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\components\product_categories\" />
-    <Folder Include="app\shared\serivces\" />
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Client\" />
     <Folder Include="Infrastructure\Extentions\" />

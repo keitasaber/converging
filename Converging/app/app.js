@@ -1,6 +1,12 @@
 ﻿/// <reference path="../scripts/angular.js" />
 (function () {
-    angular.module('converging', ['converging.products','converging.common']).config(config);
+    angular.module('converging',
+        [
+            'converging.products',
+            'converging.productCategories',
+            'converging.common'
+        ])
+        .config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 

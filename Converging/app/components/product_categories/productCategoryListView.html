@@ -1,0 +1,52 @@
+﻿<div class="page-header">
+    <h3 class="page-title">
+        Danh mục sản phẩm
+    </h3>
+    <!--<nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Tables</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Basic tables</li>
+        </ol>
+    </nav>-->
+</div>
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Basic Table</h4>
+                <p class="card-description">
+                    Add class <code>.table</code>
+                </p>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên danh mục</th>
+                            <th>Ngày tạo</th>
+                            <th>Trạng thái</th>
+                            <th style="text-align: center">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in productCategories">
+                            <td style="width: 5%">{{item.ID}}</td>
+                            <td style="width: 40%">{{item.Name}}</td>
+                            <td style="width: 30%">{{item.CreatedDate | date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                            <td style="width: 10%"><label ng-class="{'badge badge-danger':item.Status==true, 'badge badge-success':item.Status==false}">
+                                    {{item.Status | statusFilter}}
+                                </label>
+                            </td>
+                            <td>
+                                <button style="margin: 3px;" class="btn btn-gradient-success btn-rounded btn-icon"><i class="mdi mdi-table-edit"></i></button>
+                                <button style="margin: 3px;" class="btn btn-gradient-danger btn-rounded btn-icon"><i class="mdi mdi-delete"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

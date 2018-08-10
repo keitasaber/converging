@@ -20,6 +20,7 @@
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/Assets/Admin/css/style.css">
+    <link href="~/Assets/Admin/css/font-style.css" rel="stylesheet" />
     <!-- endinject -->
     <link rel="shortcut icon" href="/Assets/Admin/images/favicon.png" />
 </head>
@@ -213,14 +214,14 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                            <span class="menu-title">UI Elements</span>
+                            <span class="menu-title">Sản phẩm</span>
                             <i class="menu-arrow"></i>
                             <i class="mdi mdi-crosshairs-gps menu-icon"></i>
                         </a>
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" ui-sref="products">Product List</a></li>
-                                <li class="nav-item"> <a class="nav-link" ui-sref="product_add">Product Add</a></li>
+                                <li class="nav-item"> <a class="nav-link" ui-sref="productCategories">Danh mục sản phẩm</a></li>
+                                <li class="nav-item"> <a class="nav-link" ui-sref="products">Sản phẩm</a></li>
                             </ul>
                         </div>
                     </li>
@@ -318,12 +319,16 @@
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/angular-ui-router.js"></script>
     <script src="~/app/shared/modules/converging.common.js"></script>
-    <script src="~/app/app.js"></script>
-    <script src="~/app/components/home/homeController.js"></script>
+    <script src="~/app/shared/filters/statusFilter.js"></script>
+    <script src="~/app/components/product_categories/productCateogries.module.js"></script>
     <script src="~/app/components/products/products.module.js"></script>
+    <script src="~/app/app.js"></script>
+    <script src="~/app/shared/serivces/apiService.js"></script>
+    <script src="~/app/components/home/homeController.js"></script>
     <script src="~/app/components/products/productAddController.js"></script>
     <script src="~/app/components/products/productEditController.js"></script>
     <script src="~/app/components/products/productListController.js"></script>
+    <script src="~/app/components/product_categories/productCategoryListController.js"></script>
 
     <!-- End custom js for this page-->
 </body>
