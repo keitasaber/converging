@@ -17328,7 +17328,7 @@ input:focus {
 .sidebar {
   min-height: calc(100vh - 70px);
   background: #ffffff;
-  font-family: "ubuntu-regular", sans-serif;
+  font-family: 'Roboto', sans-serif;
   padding: 0;
   width: 260px;
   z-index: 11;
@@ -17431,7 +17431,7 @@ input:focus {
 
 .sidebar .nav .nav-item.active > .nav-link .menu-title {
   color: #b66dff;
-  font-family: "ubuntu-medium", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .sidebar .nav .nav-item.active > .nav-link i {
@@ -18163,25 +18163,25 @@ input:focus {
 .navbar.horizontal-full-width-layout-navbar .navbar-bottom .navbar-nav .nav-item.nav-search .search-field input:-ms-input-placeholder {
   font-size: .875rem;
   color: #9c9fa6;
-  font-family: "ubuntu-regular", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .navbar.horizontal-full-width-layout-navbar .navbar-bottom .navbar-nav .nav-item.nav-search .search-field input:-moz-placeholder {
   font-size: .875rem;
   color: #9c9fa6;
-  font-family: "ubuntu-regular", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .navbar.horizontal-full-width-layout-navbar .navbar-bottom .navbar-nav .nav-item.nav-search .search-field input::-moz-placeholder {
   font-size: .875rem;
   color: #9c9fa6;
-  font-family: "ubuntu-regular", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .navbar.horizontal-full-width-layout-navbar .navbar-bottom .navbar-nav .nav-item.nav-search .search-field input::-webkit-input-placeholder {
   font-size: .875rem;
   color: #9c9fa6;
-  font-family: "ubuntu-regular", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .navbar.horizontal-full-width-layout-navbar .navbar-bottom .navbar-nav.navbar-nav-right .nav-item .nav-link {
@@ -18286,7 +18286,7 @@ input:focus {
 /* Typography */
 body {
   font-size: 1rem;
-  font-family: "ubuntu-regular", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: initial;
   line-height: normal;
   -webkit-font-smoothing: antialiased;
@@ -18304,7 +18304,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "ubuntu-medium", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 p {
@@ -18602,7 +18602,7 @@ code {
   -webkit-transition: all 0.25s ease;
   -ms-transition: all 0.25s ease;
   font-size: calc(0.875rem - 0.05rem);
-  font-family: "ubuntu-regular", sans-serif;
+  font-family: 'Roboto', sans-serif;
   border-top: 1px solid #dccedf;
 }
 
@@ -18742,7 +18742,7 @@ code {
 }
 
 .font-weight-normal {
-  font-family: "ubuntu-regular", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 /* Demo Styles */
@@ -18869,7 +18869,7 @@ code {
   vertical-align: middle;
   line-height: 1;
   margin: auto 0;
-  color: #b1b1b1;
+  color: #b1b1b1;font-family: 'Roboto', sans-serif;
 }
 
 /*-------------------------------------------------------------------*/
@@ -18881,7 +18881,7 @@ code {
   font-weight: initial;
   line-height: 1;
   padding: .375rem .5625rem;
-  font-family: "ubuntu-medium", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .badge.badge-pill {
@@ -20051,19 +20051,19 @@ code {
   color: #000;
   margin-bottom: .75rem;
   text-transform: capitalize;
-  font-family: "ubuntu-medium", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 1.125rem;
 }
 
 .card .card-subtitle {
-  font-family: "ubuntu-regular", sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin-top: 0.625rem;
   margin-bottom: 0.625rem;
 }
 
 .card .card-description {
   margin-bottom: 1.5rem;
-  font-family: "ubuntu-regular", sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #76838f;
 }
 
@@ -20479,7 +20479,7 @@ code {
 
 .form-control {
   border: 1px solid #ebedf2;
-  font-family: "ubuntu-regular", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 0.8125rem;
 }
 
@@ -20595,7 +20595,7 @@ select.form-control.border-dark:focus {
   -webkit-align-items: center;
   align-items: center;
   padding: 15px 15px;
-  font-family: "ubuntu-regular", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 0.875rem;
 }
 
@@ -20856,7 +20856,7 @@ dl li {
 .table thead th {
   border-top: 0;
   border-bottom-width: 1px;
-  font-family: "ubuntu-medium", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: initial;
 }
 

@@ -1,24 +1,22 @@
-﻿<div class="page-header">
-    <h3 class="page-title">
-        Danh mục sản phẩm
-    </h3>
-    <!--<nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Tables</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Basic tables</li>
-        </ol>
-    </nav>-->
+﻿<div style="margin-bottom: 15px;">
+    <div class="input-group col-md-6">
+        <input ng-model="keyword" type="text" class="form-control" placeholder="Từ khóa..." aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-sm btn-gradient-primary" type="button" ng-click="search()">Tìm kiếm</button>
+        </div>
+    </div>
 </div>
 
 <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Basic Table</h4>
+                <div class="card-title">
+                    Danh mục sản phẩm
+                </div>
                 <p class="card-description">
-                    Add class <code>.table</code>
+                    Tổng số danh mục: {{totalCount}}
                 </p>
-
                 <table class="table">
                     <thead>
                         <tr>

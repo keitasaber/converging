@@ -24,18 +24,18 @@ namespace Converging.Api
         }
 
         [Route("get")]
-        public HttpResponseMessage Get(HttpRequestMessage requestMessage, int page, int pageSize)
+        public HttpResponseMessage Get(HttpRequestMessage requestMessage, string keyword, int page, int pageSize)
         {
             return CreateHttpResponse(requestMessage, () =>
             {
                 int totalRow = 0;
-                var model = _productCategorySevice.GetAll();
+                var model = _productCategorySevice.GetAll(keyword);
                 totalRow = model.Count();
 
                 var query = model.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
 
                 var listProductCategoryViewModel = AutoMapperConfiguration.Mapping.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(query);
-                
+
 
                 PaginationSet<ProductCategoryViewModel> paginationSet = new PaginationSet<ProductCategoryViewModel>()
                 {
