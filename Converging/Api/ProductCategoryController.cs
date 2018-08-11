@@ -1,4 +1,5 @@
 ﻿using Converging.Infrastructure.Core;
+using Converging.Infrastructure.Extentions;
 using Converging.Mappings;
 using Converging.Model.Models;
 using Converging.Models;
@@ -91,6 +92,53 @@ namespace Converging.Api
                 }
                 return responseMessage;
             });
+        }
+
+        [Route("update")]
+        [HttpPut]
+        [AllowAnonymous]
+        public HttpResponseMessage Update(HttpRequestMessage requestMessage, ProductCategoryViewModel productCategoryViewModel)
+        {
+            return CreateHttpResponse(requestMessage, () =>
+            {
+                HttpResponseMessage responseMessage = null;
+                if (!ModelState.IsValid)
+                {
+                    responseMessage = requestMessage.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    ProductCategory oldProductCategory = _productCategorySevice.GetById(productCategoryViewModel.ID);
+                    oldProductCategory.UpdateProductCategory(productCategoryViewModel);
+                    oldProductCategory.UpdatedDate = DateTime.Now;
+                    _productCategorySevice.Update(oldProductCategory);
+                    _productCategorySevice.Save();
+
+                    var responseData = AutoMapperConfiguration.Mapping.Map<ProductCategory, ProductCategoryViewModel>(oldProductCategory);
+                    responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, responseData);
+                    
+                }
+                return responseMessage;
+            });
+        }
+
+        [Route("getbyid/{id:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetById(HttpRequestMessage requestMessage, int id)
+        {
+            return CreateHttpResponse(requestMessage, () =>
+            {
+                HttpResponseMessage responseMessage = null;
+                ProductCategory productCategory = _productCategorySevice.GetById(id);
+
+                var responseData = AutoMapperConfiguration.Mapping.Map<ProductCategory, ProductCategoryViewModel>(productCategory);
+
+                responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, responseData);
+
+                return responseMessage;
+            });
+
+            
         }
     }
 }

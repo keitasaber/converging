@@ -1,14 +1,11 @@
 ﻿<div class="col-md-6 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Default form</h4>
-            <p class="card-description">
-                Basic form layout
-            </p>
+            <h4 class="card-title">Thêm mới danh mục</h4>
             <form class="forms-sample" novalidate name="frmAddProductCategory" role="form" ng-submit="AddProductCategory()">
                 <div class="form-group">
                     <label for="category_name">Tên danh mục</label>
-                    <input type="text" id="product_category_name" class="form-control" name="name" ng-model="productCategory.Name" placeholder="Tên danh mục...">
+                    <input type="text" id="product_category_name" class="form-control" ng-change="getSeoTitle()" name="name" ng-model="productCategory.Name" placeholder="Tên danh mục...">
                 </div>
                 <div class="form-group">
                     <label for="product_category_alias">Tiêu đề seo</label>
@@ -55,8 +52,8 @@
                         <i class="input-helper"></i>
                     </label>
                 </div>
-                <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
-                <button class="btn btn-light">Cancel</button>
+                <button type="submit" class="btn btn-gradient-primary mr-2">Thêm</button>
+                <button ui-sref="product_categories" class="btn btn-light">Trở về</button>
             </form>
         </div>
     </div>

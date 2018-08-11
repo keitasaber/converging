@@ -194,6 +194,7 @@
     </Compile>
     <Compile Include="Infrastructure\Core\ApiControllerBase.cs" />
     <Compile Include="Infrastructure\Core\PaginationSet.cs" />
+    <Compile Include="Infrastructure\Extentions\EntityExtentions.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Models\ProductCategoryViewModel.cs" />
     <Compile Include="Models\ProductTagViewModel.cs" />
@@ -223,6 +224,7 @@
     <Content Include="app\shared\directives\pagerDirective.js" />
     <Content Include="app\shared\filters\statusFilter.js" />
     <Content Include="app\shared\serivces\apiService.js" />
+    <Content Include="app\shared\serivces\commonService.js" />
     <Content Include="app\shared\serivces\notificationService.js" />
     <Content Include="Assets\Admin\css\font-style.css" />
     <Content Include="Assets\Admin\css\style.css" />
@@ -313,7 +315,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Client\" />
-    <Folder Include="Infrastructure\Extentions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\shared\modules\converging.common.js" />
