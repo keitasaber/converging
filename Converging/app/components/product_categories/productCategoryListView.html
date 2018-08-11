@@ -40,7 +40,7 @@
                             </td>
                             <td>
                                 <button ui-sref="product_category_edit({id:item.ID})" style="margin: 3px;" class="btn btn-outline-success btn-rounded btn-icon"><i class="mdi mdi-table-edit"></i></button>
-                                <button style="margin: 3px;" class="btn btn-outline-danger btn-rounded btn-icon"><i class="mdi mdi-delete"></i></button>
+                                <button ng-click="deleteProductCategory(item.ID)" style="margin: 3px;" class="btn btn-outline-danger btn-rounded btn-icon"><i class="mdi mdi-delete"></i></button>
                             </td>
                         </tr>
                     </tbody>

@@ -38,13 +38,12 @@ namespace Converging.Api
 
                 var listProductCategoryViewModel = AutoMapperConfiguration.Mapping.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(query);
 
-
                 PaginationSet<ProductCategoryViewModel> paginationSet = new PaginationSet<ProductCategoryViewModel>()
                 {
                     Items = listProductCategoryViewModel,
                     Page = page,
                     TotalCount = totalRow,
-                    TotalPages = (int)Math.Ceiling((decimal)(totalRow*1.0 / pageSize))
+                    TotalPages = (int)Math.Ceiling((decimal)(totalRow * 1.0 / pageSize))
                 };
                 HttpResponseMessage responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, paginationSet);
                 return responseMessage;
@@ -57,7 +56,6 @@ namespace Converging.Api
         {
             return CreateHttpResponse(requestMessage, () =>
             {
-              
                 var model = _productCategorySevice.GetAll();
 
                 var listProductCategoryViewModel = AutoMapperConfiguration.Mapping.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(model);
@@ -81,7 +79,6 @@ namespace Converging.Api
                 }
                 else
                 {
-                    
                     ProductCategory productCategory = AutoMapperConfiguration.Mapping.Map<ProductCategoryViewModel, ProductCategory>(productCategoryViewModel);
                     _productCategorySevice.Add(productCategory);
                     _productCategorySevice.Save();
@@ -116,7 +113,6 @@ namespace Converging.Api
 
                     var responseData = AutoMapperConfiguration.Mapping.Map<ProductCategory, ProductCategoryViewModel>(oldProductCategory);
                     responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, responseData);
-                    
                 }
                 return responseMessage;
             });
@@ -137,8 +133,29 @@ namespace Converging.Api
 
                 return responseMessage;
             });
+        }
 
-            
+        [Route("delete")]
+        [HttpDelete]
+        [AllowAnonymous]
+        public HttpResponseMessage Delete(HttpRequestMessage requestMessage, int id)
+        {
+            return CreateHttpResponse(requestMessage, () =>
+            {
+                HttpResponseMessage responseMessage = null;
+                if (!ModelState.IsValid)
+                {
+                    responseMessage = requestMessage.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    var oldProductCategory = _productCategorySevice.Delete(id);
+                    _productCategorySevice.Save();
+
+                    responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, oldProductCategory);
+                }
+                return responseMessage;
+            });
         }
     }
 }

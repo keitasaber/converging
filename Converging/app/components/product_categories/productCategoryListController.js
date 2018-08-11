@@ -1,15 +1,33 @@
 ﻿(function (app) {
     app.controller('productCategoryListController', productCategoryListController);
 
-    productCategoryListController.$inject = ['$scope', 'apiService', 'notificationService'];
+    productCategoryListController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox', '$state'];
 
-    function productCategoryListController($scope, apiService, notificationService) {
+    function productCategoryListController($scope, apiService, notificationService, $ngBootbox, $state) {
         $scope.productCategories = [];
         $scope.page = 0;
         $scope.pagesCount = 0;
         $scope.getProductCategories = getProductCategories;
         $scope.keyword = '';
         $scope.search = search;
+        $scope.deleteProductCategory = deleteProductCategory;
+
+        function deleteProductCategory(id) {
+            $ngBootbox.confirm('Bạn có chắc chắn muốn xóa').then(function () {
+                var config = {
+                    params: {
+                        id: id
+                    }
+                }
+                apiService.delete('api/productcategory/delete', config, function (result) {
+                    notificationService.displaySuccess('Xóa thành công');  
+                    $state.reload();
+                }, function (error) {
+                    notificationService.displayError('Xóa không thành công');
+                    })
+            }, function () {
+            })
+        }
 
         function search() {
             getProductCategories();

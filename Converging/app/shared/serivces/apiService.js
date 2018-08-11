@@ -8,11 +8,24 @@
         return {
             get: getApiResult,
             post: postApiResult,
-            put: putApiResult
+            put: putApiResult,
+            delete: deleteApiResult
         }
 
-        function postApiResult(url, params, success, failure) {
-            $http.post(url, params)
+        function deleteApiResult(url, params, success, failure) {
+            $http.delete(url, params)
+                .then(function (result) {
+                    success(result);
+                }, function (error) {
+                    if (error.status === 401) {
+                        notificationService.displayError("Authenticate is required");
+                    }
+                    failure(error);
+                })
+        }
+
+        function postApiResult(url, data, success, failure) {
+            $http.post(url, data)
                 .then(function (result) {
                     success(result);
                 }, function (error) {
@@ -32,8 +45,8 @@
                 })
         }
 
-        function putApiResult(url, params, success, failure) {
-            $http.put(url, params)
+        function putApiResult(url, data, success, failure) {
+            $http.put(url, data)
                 .then(function (result) {
                     success(result);
                 }, function (error) {
