@@ -34,17 +34,19 @@
                             <td style="width: 5%">{{item.ID}}</td>
                             <td style="width: 40%">{{item.Name}}</td>
                             <td style="width: 30%">{{item.CreatedDate | date:'dd/MM/yyyy hh:mm:ss'}}</td>
-                            <td style="width: 10%"><label ng-class="{'badge badge-danger':item.Status==true, 'badge badge-success':item.Status==false}">
+                            <td style="width: 10%">
+                                <label ng-class="{'badge badge-danger':item.Status==true, 'badge badge-success':item.Status==false}">
                                     {{item.Status | statusFilter}}
                                 </label>
                             </td>
                             <td>
-                                <button style="margin: 3px;" class="btn btn-gradient-success btn-rounded btn-icon"><i class="mdi mdi-table-edit"></i></button>
-                                <button style="margin: 3px;" class="btn btn-gradient-danger btn-rounded btn-icon"><i class="mdi mdi-delete"></i></button>
+                                <button style="margin: 3px;" class="btn btn-outline-success btn-rounded btn-icon"><i class="mdi mdi-table-edit"></i></button>
+                                <button style="margin: 3px;" class="btn btn-outline-danger btn-rounded btn-icon"><i class="mdi mdi-delete"></i></button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="getProductCategories(page)"></pager-directive>
             </div>
         </div>
     </div>
