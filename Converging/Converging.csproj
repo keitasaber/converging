@@ -223,6 +223,7 @@
     <Content Include="app\shared\directives\pagerDirective.js" />
     <Content Include="app\shared\filters\statusFilter.js" />
     <Content Include="app\shared\serivces\apiService.js" />
+    <Content Include="app\shared\serivces\notificationService.js" />
     <Content Include="Assets\Admin\css\font-style.css" />
     <Content Include="Assets\Admin\css\style.css" />
     <Content Include="Assets\Admin\images\dashboard\circle.svg" />
@@ -276,6 +277,8 @@
     <Content Include="Assets\Admin\vendors\iconfonts\mdi\preview.html" />
     <Content Include="Assets\Admin\vendors\js\vendor.bundle.addons.js" />
     <Content Include="Assets\Admin\vendors\js\vendor.bundle.base.js" />
+    <Content Include="content\toastr.css" />
+    <Content Include="content\toastr.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
@@ -288,6 +291,13 @@
     <Content Include="Scripts\angular-ui-router.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="content\toastr.scss" />
+    <Content Include="content\toastr.less" />
+    <None Include="Scripts\jquery-1.6.3-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.6.3.js" />
+    <Content Include="Scripts\jquery-1.6.3.min.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\ui-router.js" />
     <Content Include="Scripts\ui-router.min.js" />
     <Content Include="Web.config" />
