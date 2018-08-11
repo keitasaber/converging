@@ -37,7 +37,7 @@
                 })
             }
             else {
-                toastr.displayError(error)
+                toastr.error(error)
             }
         } 
 

@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
 namespace Converging.Models
 {
     public class ProductCategoryViewModel
-    {
+    {         
         public int ID { set; get; }
 
+        [Required]
         public string Name { set; get; }
 
         public string Alias { set; get; }
@@ -36,6 +38,7 @@ namespace Converging.Models
 
         public string MetaDescription { set; get; }
 
+        [Required]
         public bool Status { set; get; }
 
         public virtual IEnumerable<ProductViewModel> Products { set; get; }

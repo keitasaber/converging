@@ -1,10 +1,63 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+﻿<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Default form</h4>
+            <p class="card-description">
+                Basic form layout
+            </p>
+            <form class="forms-sample" novalidate name="frmAddProductCategory" role="form" ng-submit="AddProductCategory()">
+                <div class="form-group">
+                    <label for="category_name">Tên danh mục</label>
+                    <input type="text" id="product_category_name" class="form-control" name="name" ng-model="productCategory.Name" placeholder="Tên danh mục...">
+                </div>
+                <div class="form-group">
+                    <label for="product_category_alias">Tiêu đề seo</label>
+                    <input type="text" id="product_category_alias" class="form-control" name="alias" ng-model="productCategory.Alias" placeholder="Tiêu đề seo...">
+                </div>
+                <div class="form-group">
+                    <label for="product_category_description">Mô tả ngắn</label>
+                    <input type="text" class="form-control" id="product_category_description" name="description" ng-model="productCategory.Description" placeholder="Mô tả ngắn...">
+                </div>
+                <div class="form-group">
+                    <label for="product_category_parent_id">Danh mục cha</label>
+                    <select class="form-control" id="product_category_parent_id" ng-model="productCategory.ParentID" ng-options="option.ID as option.Name for option in parentCategories">
+                        <option value="">Danh mục gốc</option>
+                    </select>
+                    <input type="hidden" name="parentId" ng-model="productCategory.ParentID"/>
+                </div>
+                <div class="form-group">
+                    <label for="product_category_display_order">Thứ tự</label>
+                    <input type="number" class="form-control" id="product_category_display_order" name="displayOrder" ng-model="productCategory.DisplayOrder">
+                </div>
+                <div class="form-group">
+                    <label for="product_category_image">Hình ảnh</label>
+                    <input type="text" class="form-control" id="product_category_image" name="image" ng-model="productCategory.Image">
+                </div>
+                <div class="form-group">
+                    <label for="product_category_meta_keyword">Meta Keyword</label>
+                    <input type="text" class="form-control" id="product_category_meta_keyword" name="metaKeyWord" ng-model="productCategory.MetaKeyword" placeholder="Meta keyword...">
+                </div>
+                <div class="form-group">
+                    <label for="product_category_meta_description">Meta Description</label>
+                    <textarea class="form-control" id="product_category_meta_description" name="metaDescription" ng-model="productCategory.MetaDescription"></textarea>
+                </div>
+                <div class="form-check form-check-flat form-check-primary">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="status" ng-model="productCategory.Status" ng-checked="productCategory.Status">
+                        Kích hoạt
+                        <i class="input-helper"></i>
+                    </label>
+                </div>
+                <div class="form-check form-check-flat form-check-primary">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="homgFlag" ng-model="productCategory.HomeFlag" ng-checked="productCategory.HomeFlag">
+                        Hiển thị trang chủ
+                        <i class="input-helper"></i>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+                <button class="btn btn-light">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>

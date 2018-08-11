@@ -24,6 +24,7 @@ namespace Converging.Api
         }
 
         [Route("get")]
+        [HttpGet]
         public HttpResponseMessage Get(HttpRequestMessage requestMessage, string keyword, int page, int pageSize)
         {
             return CreateHttpResponse(requestMessage, () =>
@@ -42,9 +43,52 @@ namespace Converging.Api
                     Items = listProductCategoryViewModel,
                     Page = page,
                     TotalCount = totalRow,
-                    TotalPages = (int)Math.Ceiling((decimal)(totalRow / pageSize))
+                    TotalPages = (int)Math.Ceiling((decimal)(totalRow*1.0 / pageSize))
                 };
                 HttpResponseMessage responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, paginationSet);
+                return responseMessage;
+            });
+        }
+
+        [Route("getallparents")]
+        [HttpGet]
+        public HttpResponseMessage Get(HttpRequestMessage requestMessage)
+        {
+            return CreateHttpResponse(requestMessage, () =>
+            {
+              
+                var model = _productCategorySevice.GetAll();
+
+                var listProductCategoryViewModel = AutoMapperConfiguration.Mapping.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(model);
+                HttpResponseMessage responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, listProductCategoryViewModel);
+
+                return responseMessage;
+            });
+        }
+
+        [Route("create")]
+        [HttpPost]
+        [AllowAnonymous]
+        public HttpResponseMessage Create(HttpRequestMessage requestMessage, ProductCategoryViewModel productCategoryViewModel)
+        {
+            return CreateHttpResponse(requestMessage, () =>
+            {
+                HttpResponseMessage responseMessage = null;
+                if (!ModelState.IsValid)
+                {
+                    responseMessage = requestMessage.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    
+                    ProductCategory productCategory = AutoMapperConfiguration.Mapping.Map<ProductCategoryViewModel, ProductCategory>(productCategoryViewModel);
+                    _productCategorySevice.Add(productCategory);
+                    _productCategorySevice.Save();
+
+                    var responseData = AutoMapperConfiguration.Mapping.Map<ProductCategory, ProductCategoryViewModel>(productCategory);
+
+                    responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, productCategory);
+                }
                 return responseMessage;
             });
         }

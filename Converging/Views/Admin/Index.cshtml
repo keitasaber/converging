@@ -21,6 +21,7 @@
     <!-- inject:css -->
     <link href="~/content/toastr.css" rel="stylesheet" />
     <link rel="stylesheet" href="/Assets/Admin/css/style.css">
+    <link href="~/Assets/Admin/css/font-style.css" rel="stylesheet" />
     <!-- endinject -->
     <link rel="shortcut icon" href="/Assets/Admin/images/favicon.png" />
 </head>
@@ -220,7 +221,7 @@
                         </a>
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" ui-sref="productCategories">Danh mục sản phẩm</a></li>
+                                <li class="nav-item"> <a class="nav-link" ui-sref="product_categories">Danh mục sản phẩm</a></li>
                                 <li class="nav-item"> <a class="nav-link" ui-sref="products">Sản phẩm</a></li>
                             </ul>
                         </div>
@@ -324,7 +325,7 @@
     <script src="~/app/shared/serivces/apiService.js"></script>
     <script src="~/app/shared/serivces/notificationService.js"></script>
     <script src="~/app/shared/directives/pagerDirective.js"></script>
-    <script src="~/app/components/product_categories/productCateogries.module.js"></script>
+    <script src="~/app/components/product_categories/productCategories.module.js"></script>
     <script src="~/app/components/products/products.module.js"></script>
     <script src="~/app/app.js"></script>
     <script src="~/app/components/home/homeController.js"></script>
@@ -332,6 +333,7 @@
     <script src="~/app/components/products/productEditController.js"></script>
     <script src="~/app/components/products/productListController.js"></script>
     <script src="~/app/components/product_categories/productCategoryListController.js"></script>
+    <script src="~/app/components/product_categories/productCategoryAddController.js"></script>
 
     <!-- End custom js for this page-->
 </body>
