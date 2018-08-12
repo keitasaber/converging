@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 
 namespace Converging.Api
 {
@@ -153,6 +154,33 @@ namespace Converging.Api
                     _productCategorySevice.Save();
 
                     responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, oldProductCategory);
+                }
+                return responseMessage;
+            });
+        }
+
+        [Route("deletemultiple")]
+        [HttpDelete]
+        [AllowAnonymous]
+        public HttpResponseMessage DeleteMultiple(HttpRequestMessage requestMessage, string checkedProductCategories)
+        {
+            return CreateHttpResponse(requestMessage, () =>
+            {
+                HttpResponseMessage responseMessage = null;
+                if (!ModelState.IsValid)
+                {
+                    responseMessage = requestMessage.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    var ids = new JavaScriptSerializer().Deserialize<List<int>>(checkedProductCategories);
+                    foreach (var id in ids)
+                    {
+                        var oldProductCategory = _productCategorySevice.Delete(id);
+                    }
+                    _productCategorySevice.Save();
+
+                    responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, ids.Count);
                 }
                 return responseMessage;
             });

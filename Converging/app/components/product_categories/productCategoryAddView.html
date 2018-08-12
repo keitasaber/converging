@@ -6,10 +6,14 @@
                 <div class="form-group">
                     <label for="category_name">Tên danh mục</label>
                     <input type="text" id="product_category_name" class="form-control" ng-change="getSeoTitle()" name="name" ng-model="productCategory.Name" placeholder="Tên danh mục...">
+                    <em class="text-danger" ng-show="frmAddProductCategory.name.$error.required">Phải nhập tên danh mục</em>
+                    <em class="text-danger" ng-show="frmAddProductCategory.name.$error.maxlength">Tối đa 50 ký tự</em>
                 </div>
                 <div class="form-group">
                     <label for="product_category_alias">Tiêu đề seo</label>
                     <input type="text" id="product_category_alias" class="form-control" name="alias" ng-model="productCategory.Alias" placeholder="Tiêu đề seo...">
+                    <em class="text-danger" ng-show="frmAddProductCategory.name.$error.required">Phải nhập tiêu đề seo</em>
+                    <em class="text-danger" ng-show="frmAddProductCategory.name.$error.maxlength">Tối đa 50 ký tự</em>
                 </div>
                 <div class="form-group">
                     <label for="product_category_description">Mô tả ngắn</label>
@@ -52,7 +56,7 @@
                         <i class="input-helper"></i>
                     </label>
                 </div>
-                <button type="submit" class="btn btn-gradient-primary mr-2">Thêm</button>
+                <button ng-disabled="frmAddProductCategory.$invalid" type="submit" class="btn mr-2 {{frmUpdateProductCategory.$invalid == false ? 'btn-gradient-primary' : ''}}">Thêm</button>
                 <button ui-sref="product_categories" class="btn btn-light">Trở về</button>
             </form>
         </div>

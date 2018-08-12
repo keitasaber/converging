@@ -1,9 +1,9 @@
 ﻿(function (app) {
     app.controller('productCategoryListController', productCategoryListController);
 
-    productCategoryListController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox', '$state'];
-
-    function productCategoryListController($scope, apiService, notificationService, $ngBootbox, $state) {
+    productCategoryListController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox', '$state', '$filter'];
+    
+    function productCategoryListController($scope, apiService, notificationService, $ngBootbox, $state, $filter) {
         $scope.productCategories = [];
         $scope.page = 0;
         $scope.pagesCount = 0;
@@ -11,6 +11,54 @@
         $scope.keyword = '';
         $scope.search = search;
         $scope.deleteProductCategory = deleteProductCategory;
+        $scope.selectAll = selectAll;
+        $scope.isAll = false;
+        $scope.deleteMultiple = deleteMultiple;
+
+        function deleteMultiple() {
+            var listId = [];
+            $.each($scope.selected, function (i, item) {
+                listId.push(item.ID)
+            })
+            var config = {
+                params: {
+                    checkedProductCategories: JSON.stringify(listId)
+                }
+            }
+            apiService.delete('/api/productcategory/deletemultiple', config, function (result) {
+                notificationService.displaySuccess('Xóa thành công ' + result.data + ' danh mục');  
+                $state.reload();
+            }, function (error) {
+                notificationService.displayError('Xóa không thành công');
+            })
+        }
+        
+
+        function selectAll() {
+            if ($scope.isAll === false) {
+                angular.forEach($scope.productCategories, function (item) {
+                    item.checked = true;
+                });
+                $scope.isAll = true;
+            } else {
+                angular.forEach($scope.productCategories, function (item) {
+                    item.checked = false;
+                });
+                $scope.isAll = false;
+            }
+        }
+
+        $scope.$watch("productCategories", function (n, o) {
+            var checked = $filter("filter")(n, { checked: true });
+            if (checked.length) {
+                $scope.selected = checked;
+                $('#btnDelete').removeAttr('disabled');
+                $('#btnDelete').attr('class', 'btn btn-sm btn-outline-danger');
+            } else {
+                $('#btnDelete').attr('disabled', 'disabled');
+                $('#btnDelete').attr('class', 'btn btn-sm');
+            }
+        }, true);
 
         function deleteProductCategory(id) {
             $ngBootbox.confirm('Bạn có chắc chắn muốn xóa').then(function () {
@@ -24,7 +72,7 @@
                     $state.reload();
                 }, function (error) {
                     notificationService.displayError('Xóa không thành công');
-                    })
+                })
             }, function () {
             })
         }

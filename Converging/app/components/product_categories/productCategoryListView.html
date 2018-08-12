@@ -12,8 +12,9 @@
         <div class="card">
             <div class="card-body">
                 <div class="card-title">
-                    Danh mục sản phẩm  
+                    Danh mục sản phẩm
                     <button ui-sref="product_category_add" style="float: right" type="button" class="btn btn-outline-primary btn-sm">Thêm mới</button>
+                    <button ng-click="deleteMultiple()" style="float: right; margin-right: 10px" disabled type="button" id="btnDelete" class="btn btn-sm">Xóa</button>
                 </div>
                 <p class="card-description">
                     Tổng số danh mục: {{totalCount}}
@@ -21,19 +22,21 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Tên danh mục</th>
-                            <th>Ngày tạo</th>
-                            <th>Trạng thái</th>
+                            <td><input name="all" type="checkbox" ng-click="selectAll()"/></td>
+                            <th style="width: 5%">ID</th>
+                            <th style="width: 35%">Tên danh mục</th>
+                            <th style="width: 30%">Ngày tạo</th>
+                            <th style="width: 10%">Trạng thái</th>
                             <th style="text-align: center">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in productCategories">
-                            <td style="width: 5%">{{item.ID}}</td>
-                            <td style="width: 40%">{{item.Name}}</td>
-                            <td style="width: 30%">{{item.CreatedDate | date:'dd/MM/yyyy hh:mm:ss'}}</td>
-                            <td style="width: 10%">
+                            <td><input type="checkbox" ng-model="item.checked" name="all" /></td>
+                            <td>{{item.ID}}</td>
+                            <td>{{item.Name}}</td>
+                            <td>{{item.CreatedDate | date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                            <td>
                                 <label ng-class="{'badge badge-danger':item.Status==true, 'badge badge-success':item.Status==false}">
                                     {{item.Status | statusFilter}}
                                 </label>
