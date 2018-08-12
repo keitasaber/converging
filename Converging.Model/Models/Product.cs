@@ -28,10 +28,7 @@ namespace Converging.Model.Models
         [Column(TypeName = "xml")]
         public string MoreImages { set; get; }
 
-        public decimal Price { set; get; }
-
-        public decimal? PromotionPrice { set; get; }
-        public int? Warranty { set; get; }
+        public string Link { set; get; }
 
         [MaxLength(500)]
         public string Description { set; get; }

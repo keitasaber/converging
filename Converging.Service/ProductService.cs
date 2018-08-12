@@ -18,7 +18,9 @@ namespace Converging.Service
         Product Delete(int id);
 
         IEnumerable<Product> GetAll();
-       
+
+        IEnumerable<Product> GetAll(string keyword);
+
         Product GetById(int id);
 
         void Save();
@@ -54,6 +56,14 @@ namespace Converging.Service
             return this._productRepository.GetAll();
         }
 
+        public IEnumerable<Product> GetAll(string keyword)
+        {
+            if (!string.IsNullOrEmpty(keyword))
+                return this._productRepository.GetMulti(x => x.Name.Contains(keyword) || x.Description.Contains(keyword));
+            else
+                return _productRepository.GetAll();
+        }
+
         public Product GetById(int id)
         {
             return this._productRepository.GetSingleById(id);
@@ -63,5 +73,6 @@ namespace Converging.Service
         {
             this._unitOfWork.Commit();
         }
+
     }
 }

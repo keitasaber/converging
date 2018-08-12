@@ -17,12 +17,27 @@ namespace Converging.Api
     [RoutePrefix("api/productcategory")]
     public class ProductCategoryController : ApiControllerBase
     {
-        private IProductCategoryService _productCategorySevice;
+        private IProductCategoryService _productCategoryService;
 
         public ProductCategoryController(IErrorService errorService, IProductCategoryService productCategoryService)
             : base(errorService)
         {
-            this._productCategorySevice = productCategoryService;
+            this._productCategoryService = productCategoryService;
+        }
+
+        [Route("getall")]
+        [HttpGet]
+        public HttpResponseMessage GetAll(HttpRequestMessage requestMessage)
+        {
+            return CreateHttpResponse(requestMessage, () =>
+            {
+                var model = _productCategoryService.GetAll();
+
+                var listProductCategoryViewModel = AutoMapperConfiguration.Mapping.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(model);
+                HttpResponseMessage responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, listProductCategoryViewModel);
+
+                return responseMessage;
+            });
         }
 
         [Route("get")]
@@ -32,10 +47,10 @@ namespace Converging.Api
             return CreateHttpResponse(requestMessage, () =>
             {
                 int totalRow = 0;
-                var model = _productCategorySevice.GetAll(keyword);
+                var model = _productCategoryService.GetAll(keyword);
                 totalRow = model.Count();
 
-                var query = model.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
+                var query = model.OrderBy(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
 
                 var listProductCategoryViewModel = AutoMapperConfiguration.Mapping.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(query);
 
@@ -57,7 +72,7 @@ namespace Converging.Api
         {
             return CreateHttpResponse(requestMessage, () =>
             {
-                var model = _productCategorySevice.GetAll();
+                var model = _productCategoryService.GetAll();
 
                 var listProductCategoryViewModel = AutoMapperConfiguration.Mapping.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(model);
                 HttpResponseMessage responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, listProductCategoryViewModel);
@@ -81,8 +96,8 @@ namespace Converging.Api
                 else
                 {
                     ProductCategory productCategory = AutoMapperConfiguration.Mapping.Map<ProductCategoryViewModel, ProductCategory>(productCategoryViewModel);
-                    _productCategorySevice.Add(productCategory);
-                    _productCategorySevice.Save();
+                    _productCategoryService.Add(productCategory);
+                    _productCategoryService.Save();
 
                     var responseData = AutoMapperConfiguration.Mapping.Map<ProductCategory, ProductCategoryViewModel>(productCategory);
 
@@ -106,11 +121,11 @@ namespace Converging.Api
                 }
                 else
                 {
-                    ProductCategory oldProductCategory = _productCategorySevice.GetById(productCategoryViewModel.ID);
+                    ProductCategory oldProductCategory = _productCategoryService.GetById(productCategoryViewModel.ID);
                     oldProductCategory.UpdateProductCategory(productCategoryViewModel);
                     oldProductCategory.UpdatedDate = DateTime.Now;
-                    _productCategorySevice.Update(oldProductCategory);
-                    _productCategorySevice.Save();
+                    _productCategoryService.Update(oldProductCategory);
+                    _productCategoryService.Save();
 
                     var responseData = AutoMapperConfiguration.Mapping.Map<ProductCategory, ProductCategoryViewModel>(oldProductCategory);
                     responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, responseData);
@@ -126,7 +141,7 @@ namespace Converging.Api
             return CreateHttpResponse(requestMessage, () =>
             {
                 HttpResponseMessage responseMessage = null;
-                ProductCategory productCategory = _productCategorySevice.GetById(id);
+                ProductCategory productCategory = _productCategoryService.GetById(id);
 
                 var responseData = AutoMapperConfiguration.Mapping.Map<ProductCategory, ProductCategoryViewModel>(productCategory);
 
@@ -150,8 +165,8 @@ namespace Converging.Api
                 }
                 else
                 {
-                    var oldProductCategory = _productCategorySevice.Delete(id);
-                    _productCategorySevice.Save();
+                    var oldProductCategory = _productCategoryService.Delete(id);
+                    _productCategoryService.Save();
 
                     responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, oldProductCategory);
                 }
@@ -176,9 +191,9 @@ namespace Converging.Api
                     var ids = new JavaScriptSerializer().Deserialize<List<int>>(checkedProductCategories);
                     foreach (var id in ids)
                     {
-                        var oldProductCategory = _productCategorySevice.Delete(id);
+                        var oldProductCategory = _productCategoryService.Delete(id);
                     }
-                    _productCategorySevice.Save();
+                    _productCategoryService.Save();
 
                     responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, ids.Count);
                 }

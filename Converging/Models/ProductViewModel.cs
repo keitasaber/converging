@@ -19,10 +19,7 @@ namespace Converging.Models
 
         public string MoreImages { set; get; }
 
-        public decimal Price { set; get; }
-
-        public decimal? PromotionPrice { set; get; }
-        public int? Warranty { set; get; }
+        public string Link { set; get; }
 
         public string Description { set; get; }
 
