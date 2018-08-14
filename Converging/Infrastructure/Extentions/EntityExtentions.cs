@@ -39,7 +39,11 @@ namespace Converging.Infrastructure.Extentions
             product.CategoryID = productVm.CategoryID;
             product.Link = productVm.Link;
             product.Image = productVm.Image;
+            product.MoreImages = productVm.MoreImages;
+            product.Content = productVm.Content;
+            product.Tags = productVm.Tags;
             product.HomeFlag = productVm.HomeFlag;
+            product.HotFlag = productVm.HotFlag;
 
             product.CreatedDate = productVm.CreatedDate;
             product.CreatedBy = productVm.CreatedBy;

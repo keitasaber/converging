@@ -5,9 +5,7 @@
 
     function productCategoryEditController(apiService, $scope, notificationService, $state, $stateParams, commonService) {
         $scope.productCategory = {
-            UpdatedDate: new Date(),
-            Status: true,
-            Name: "Danh mục 1"
+            UpdatedDate: new Date()
         }
 
         $scope.parentCategories = [];

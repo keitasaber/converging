@@ -1,4 +1,5 @@
-﻿using Converging.Infrastructure.Core;
+﻿using Converging.Common;
+using Converging.Infrastructure.Core;
 using Converging.Infrastructure.Extentions;
 using Converging.Mappings;
 using Converging.Model.Models;
@@ -12,7 +13,6 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Web.Script.Serialization;
-
 namespace Converging.Api
 {
     [RoutePrefix("api/product")]
@@ -65,6 +65,11 @@ namespace Converging.Api
                 }
                 else
                 {
+                    if (ArrayHelper.IsDuplicateTag(productViewModel.Tags))
+                    {
+                        return responseMessage = requestMessage.CreateResponse(HttpStatusCode.BadRequest, CommonConstants.DUPLICATE_TAG);
+                    }
+
                     Product product = AutoMapperConfiguration.Mapping.Map<ProductViewModel, Product>(productViewModel);
                     _productService.Add(product);
                     _productService.Save();
@@ -91,6 +96,11 @@ namespace Converging.Api
                 }
                 else
                 {
+                    if (ArrayHelper.IsDuplicateTag(productViewModel.Tags))
+                    {
+                        return responseMessage = requestMessage.CreateResponse(HttpStatusCode.BadRequest, CommonConstants.DUPLICATE_TAG);
+                    }
+
                     Product oldProduct = _productService.GetById(productViewModel.ID);
                     oldProduct.UpdateProduct(productViewModel);
                     oldProduct.UpdatedDate = DateTime.Now;

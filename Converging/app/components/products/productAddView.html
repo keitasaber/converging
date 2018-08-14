@@ -26,25 +26,44 @@
                     <input type="hidden" name="parentId" ng-model="productCategory.ParentID" />
                 </div>
                 <div class="form-group">
-                    <label for="product_display_order">Thứ tự</label>
-                    <input type="number" class="form-control" id="product_display_order" name="displayOrder" ng-model="product.DisplayOrder">
-                </div>
-                <div class="form-group">
                     <label>Ảnh sản phẩm</label>
+                    <input type="file" name="img[]" class="file-upload-default">
                     <div class="input-group col-xs-12">
                         <input type="text" class="form-control file-upload-info" ng-model="product.Image" id="product_image" name="image" disabled="" placeholder="Đường dẫn ảnh">
                         <span class="input-group-append">
                             <button class="file-upload-browse btn btn-gradient-primary" type="button" ng-click="chooseImage()">Chọn ảnh</button>
                         </span>
+                        <img src="{{product.Image}}" />
+                    </div>
+                </div>
+                <div class="form-group">                   
+                    <div>
+                        <button class="btn btn-gradient-primary" type="button" ng-click="chooseMoreImages()">Chọn nhiều ảnh</button>
+                        <span ng-hide="(moreImages.length === 0)">
+                            <span ng-click="hideMoreImage = !hideMoreImage" class="text-primary">
+                                {{hideMoreImage == true ? 'Hiển thị ảnh đã chọn' : "Ẩn ảnh đã chọn"}}
+                            </span>                            
+                        </span>
+                        <p ng-hide="(moreImages.length === 0 || hideMoreImage)">Click vào ảnh để xóa</p>
+                    </div>
+                    <div ng-hide="hideMoreImage" class="row" style="margin-top: 15px;">
+                        <div class="col-md-3" ng-repeat="image in moreImages" style="text-align: center">
+                            <img ng-click="deleteImage(image)" style="width: 100%; height: auto" ng-src="{{image}}" />
+                            <a class="text-info" target="_blank" ng-href="{{image}}">{{getNameFromUrlImage(image)}}</a>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="product_meta_keyword">Nội dung</label>
-                    <textarea type="text" class="form-control" id="product_content" name="content" ckeditor="ckeditorOptions" ng-model="product.Content" placeholder="Meta keyword..."></textarea>
+                    <textarea type="text" class="form-control" id="product_content" name="content" ckeditor="ckeditorOptions" ng-model="product.Content"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="product_display_order">Đường dẫn file</label>
                     <input type="text" class="form-control" id="product_link" name="link" ng-model="product.Link">
+                </div>
+                <div class="form-group">
+                    <label for="product_display_order">Tags</label>
+                    <input type="text" class="form-control" name="Tags" ng-model="product.Tags">
                 </div>
                 <div class="form-group">
                     <label for="product_meta_keyword">Meta Keyword</label>

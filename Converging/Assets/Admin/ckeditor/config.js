@@ -8,8 +8,11 @@ CKEDITOR.editorConfig = function (config) {
     // config.language = 'fr';
     // config.uiColor = '#AADC6E';
 
-    config.filebrowserBrowseUrl = '/Assets/Admin/ckfinder/ckfinder.html',
-    config.filebrowserUploadUrl = '/Assets/Admin/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=files',
-    config.filebrowserWindowWidth = '1000',
-    config.filebrowserWindowHeight = '700'
+    config.extraPlugins = 'easyimage';
+    config.cloudServices_tokenUrl = '/Assets/Admin/ckeditor/cloudservices/plugin.js';
+    config.cloudServices_uploadUrl = '/Assets/Admin/ckeditor/cloudservices/plugin.js';
+    config.filebrowserBrowseUrl = '/Assets/Admin/ckfinder/ckfinder.html';
+    config.filebrowserUploadUrl = '/Assets/Admin/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=files';
+    config.filebrowserWindowWidth = '1000';
+    config.filebrowserWindowHeight = '700';
 };

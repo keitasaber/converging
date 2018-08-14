@@ -212,6 +212,8 @@
     <Content Include="app\app.js" />
     <Content Include="app\components\home\homeController.js" />
     <Content Include="app\components\home\homeView.html" />
+    <Content Include="app\components\login\loginController.js" />
+    <Content Include="app\components\login\loginView.html" />
     <Content Include="app\components\products\products.module.js" />
     <Content Include="app\components\products\productAddController.js" />
     <Content Include="app\components\products\productAddView.html" />
@@ -232,6 +234,7 @@
     <Content Include="app\shared\serivces\apiService.js" />
     <Content Include="app\shared\serivces\commonService.js" />
     <Content Include="app\shared\serivces\notificationService.js" />
+    <Content Include="app\shared\views\baseView.html" />
     <Content Include="Assets\Admin\ckeditor\adapters\jquery.js" />
     <Content Include="Assets\Admin\ckeditor\build-config.js" />
     <Content Include="Assets\Admin\ckeditor\ckeditor.js" />
@@ -1416,6 +1419,8 @@
     <Content Include="Assets\Admin\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Assets\Admin\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Assets\Admin\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />

@@ -1,8 +1,8 @@
-﻿<div class="col-md-6 grid-margin stretch-card">
+﻿<div class="col-md-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Cập nhật sản phẩm: {{product.Name}}</h4>
-            <form class="forms-sample" novalidate name="frmUpdateProduct" role="form" ng-submit="UpdateProductCategory()">
+            <form class="forms-sample" novalidate name="frmUpdateProduct" role="form" ng-submit="UpdateProduct()">
                 <div class="form-group">
                     <label for="category_name">Tên sản phẩm</label>
                     <input type="text" id="product_name" ng-maxlength="50" required class="form-control" ng-change="getSeoTitle()" name="name" ng-model="product.Name" placeholder="Tên danh mục...">
@@ -19,24 +19,49 @@
                     <label for="product_description">Mô tả ngắn</label>
                     <input type="text" class="form-control" id="product_description" name="description" ng-model="product.Description" placeholder="Mô tả ngắn...">
                 </div>
-                <!--<div class="form-group">
-        <label for="product_parent_id">Danh mục sản phẩm</label>
-        <select >
-            <option value="">Danh mục gốc</option>
-        </select>
-        <input type="hidden" name="parentId" ng-model="productCategory.ParentID" />
-    </div>-->
                 <div class="form-group">
-                    <label for="product_display_order">Thứ tự</label>
-                    <input type="number" class="form-control" id="product_display_order" name="displayOrder" ng-model="product.DisplayOrder">
+                    <label for="product_categoryid">Danh mục sản phẩm</label>
+                    <select class="form-control" name="categoryid" required ng-model="product.CategoryID" ng-options="option.ID as option.Name for option in categories"></select>
+                    <em class="text-danger" ng-show="frmAddProduct.categoryid.$error.required">Phải chọn danh mục</em>
+                    <input type="hidden" name="parentId" ng-model="productCategory.ParentID" />
                 </div>
                 <div class="form-group">
-                    <label for="product_image">Hình ảnh</label>
-                    <input type="text" class="form-control" id="product_image" name="image" ng-model="product.Image">
+                    <label>Ảnh sản phẩm</label>
+                    <div class="input-group col-xs-12">
+                        <input type="text" class="form-control file-upload-info" ng-model="product.Image" id="product_image" name="image" disabled="" placeholder="Đường dẫn ảnh">
+                        <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-gradient-primary" type="button" ng-click="chooseImage()">Chọn ảnh</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <button class="btn btn-gradient-primary" type="button" ng-click="chooseMoreImages()">Chọn nhiều ảnh</button>
+                        <span ng-hide="(moreImages.length === 0)">
+                            <span ng-click="hideMoreImage = !hideMoreImage" class="text-primary">
+                                {{hideMoreImage == true ? 'Hiển thị ảnh đã chọn' : "Ẩn ảnh đã chọn"}}
+                            </span>
+                        </span>
+                        <p ng-hide="(moreImages.length === 0 || hideMoreImage)">Click vào ảnh để xóa</p>
+                    </div>
+                    <div ng-hide="hideMoreImage" class="row" style="margin-top: 15px;">
+                        <div class="col-md-3" ng-repeat="image in moreImages" style="text-align: center">
+                            <img ng-click="deleteImage(image)" style="width: 100%; height: auto" ng-src="{{image}}" />
+                            <a class="text-info" target="_blank" ng-href="{{image}}">{{getNameFromUrlImage(image)}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="product_meta_keyword">Nội dung</label>
+                    <textarea type="text" class="form-control" id="product_content" name="content" ckeditor="ckeditorOptions" ng-model="product.Content"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="product_display_order">Đường dẫn file</label>
                     <input type="text" class="form-control" id="product_link" name="link" ng-model="product.Link">
+                </div>
+                <div class="form-group">
+                    <label for="product_display_order">Tags</label>
+                    <input type="text" class="form-control" name="Tags" ng-model="product.Tags">
                 </div>
                 <div class="form-group">
                     <label for="product_meta_keyword">Meta Keyword</label>
@@ -57,6 +82,13 @@
                     <label class="form-check-label">
                         <input type="checkbox" class="form-check-input" name="homgFlag" ng-model="product.HomeFlag" ng-checked="product.HomeFlag">
                         Hiển thị trang chủ
+                        <i class="input-helper"></i>
+                    </label>
+                </div>
+                <div class="form-check form-check-flat form-check-primary">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="hotFlag" ng-model="product.HotFlag" ng-checked="product.HotFlag">
+                        Đang thịnh hành
                         <i class="input-helper"></i>
                     </label>
                 </div>

@@ -19,12 +19,45 @@
         $scope.addProduct = addProduct;
         $scope.getSeoTitle = getSeoTitle;
         $scope.chooseImage = chooseImage;
+        $scope.moreImages = [];
+        $scope.chooseMoreImages = chooseMoreImages;
+        $scope.getNameFromUrlImage = getNameFromUrlImage;
+        $scope.deleteImage = deleteImage;
+        $scope.hideMoreImage = false;
+
+        function deleteImage(url) {
+            var index = $scope.moreImages.indexOf(url);
+            if (index > -1) {
+                $scope.moreImages.splice(index, 1);
+            }
+        }
+        
+        function getNameFromUrlImage(url) {
+            return url.replace(/^.*[\/\\]/g, '');
+        }
+
+        function chooseMoreImages() {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $scope.$apply(function () {
+                    var index = $scope.moreImages.indexOf(fileUrl);
+                    if (index === -1) {
+                        $scope.moreImages.push(fileUrl);
+                    }
+                    else {
+                        notificationService.displayWarning("Bạn đã chọn ảnh này !")
+                    }
+                })
+            }
+            finder.popup();
+        }
 
         function chooseImage() {
-            var finder = new CKFinder();                        
+            var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
-                $scope.product.Image = fileUrl;
-                $("#product_image").val(fileUrl)
+                $scope.$apply(function () {
+                    $scope.product.Image = fileUrl;
+                })
             }
             finder.popup();
         }
@@ -34,10 +67,14 @@
         }
         
         function addProduct() {
+            $scope.product.MoreImages = JSON.stringify($scope.moreImages);
             apiService.post("/api/product/create", $scope.product, function (result) {
                 notificationService.displaySuccess(result.data.Name + " đã được thêm mới")
                 $state.go('products');
-            }, function (error) {
+            }, function (error) {                
+                if (error.data === "DUPLICATE_TAG") {
+                    notificationService.displayWarning("Yêu cầu mỗi tag phải khác nhau");
+                }
                 notificationService.displayError("Thêm mới không thành công ")
             });
         }
