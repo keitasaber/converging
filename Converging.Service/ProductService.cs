@@ -24,6 +24,7 @@ namespace Converging.Service
 
         Product GetById(int id);
 
+        IEnumerable<Product> GetByCategoryID(int categoryID);
         void Save();
     }
     public class ProductService : IProductService
@@ -139,5 +140,9 @@ namespace Converging.Service
             this._unitOfWork.Commit();
         }
 
+        public IEnumerable<Product> GetByCategoryID(int categoryID)
+        {
+            return this._productRepository.GetMulti(x => x.CategoryID == categoryID);
+        }
     }
 }

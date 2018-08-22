@@ -11,7 +11,7 @@ namespace Converging.Data.Infrastructure
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
         #region Properties
-        private ConveringDbContext dataContext;
+        private ConvergingDbContext dataContext;
         private readonly IDbSet<T> dbSet;
 
         protected IDbFactory DbFactory
@@ -20,7 +20,7 @@ namespace Converging.Data.Infrastructure
             private set;
         }
 
-        protected ConveringDbContext DbContext
+        protected ConvergingDbContext DbContext
         {
             get { return dataContext ?? (dataContext = DbFactory.Init()); }
         }

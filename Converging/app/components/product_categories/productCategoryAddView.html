@@ -5,7 +5,7 @@
             <form class="forms-sample" novalidate name="frmAddProductCategory" role="form" ng-submit="AddProductCategory()">
                 <div class="form-group">
                     <label for="category_name">Tên danh mục</label>
-                    <input type="text" id="product_category_name" class="form-control" ng-change="getSeoTitle()" name="name" ng-model="productCategory.Name" placeholder="Tên danh mục...">
+                    <input type="text" id="product_category_name" ng-maxlength="50" class="form-control" ng-change="getSeoTitle()" name="name" ng-model="productCategory.Name" placeholder="Tên danh mục...">
                     <em class="text-danger" ng-show="frmAddProductCategory.name.$error.required">Phải nhập tên danh mục</em>
                     <em class="text-danger" ng-show="frmAddProductCategory.name.$error.maxlength">Tối đa 50 ký tự</em>
                 </div>
@@ -24,7 +24,7 @@
                     <select class="form-control" id="product_category_parent_id" ng-model="productCategory.ParentID" ng-options="option.ID as option.Name for option in parentCategories">
                         <option value="">Danh mục gốc</option>
                     </select>
-                    <input type="hidden" name="parentId" ng-model="productCategory.ParentID"/>
+                    <input type="hidden" name="parentId" ng-model="productCategory.ParentID" />
                 </div>
                 <div class="form-group">
                     <label for="product_category_display_order">Thứ tự</label>
@@ -56,7 +56,7 @@
                         <i class="input-helper"></i>
                     </label>
                 </div>
-                <button ng-disabled="frmAddProductCategory.$invalid" type="submit" class="btn mr-2 {{frmUpdateProductCategory.$invalid == false ? 'btn-gradient-primary' : ''}}">Thêm</button>
+                <button ng-disabled="frmAddProductCategory.$invalid" type="submit" class="btn mr-2 {{frmAddProductCategory.$invalid == false ? 'btn-gradient-primary' : ''}}">Thêm</button>
                 <button ui-sref="product_categories" class="btn btn-light">Trở về</button>
             </form>
         </div>

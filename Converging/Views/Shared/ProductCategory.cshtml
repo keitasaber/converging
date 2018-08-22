@@ -1,0 +1,28 @@
+﻿@using Converging.Models
+@model List<ProductCategoryViewModel>
+@foreach (var productCategory in Model.Where(x => x.ParentID == null))
+{
+    var childProductCategories = Model.Where(x => x.ParentID == productCategory.ID);
+    var productCategoryUrl = "/danh-muc-san-pham/" + productCategory.Alias + "/" + productCategory.ID;
+    if (childProductCategories.Count() > 0)
+    {        
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="@productCategoryUrl" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @productCategory.Name
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                @foreach (var childProductCategory in childProductCategories)
+                {
+                    var childProductCategoryUrl = "san-pham/" + childProductCategory.Alias + "/" + childProductCategory.ID;
+                    <a class="dropdown-item" href="@childProductCategoryUrl">@childProductCategory.Name</a>
+                }
+            </div>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link" href="@productCategoryUrl">@productCategory.Name</a>
+        </li>
+    }
+}

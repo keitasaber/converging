@@ -5,9 +5,9 @@
             <form class="forms-sample" novalidate name="frmAddProduct" role="form" ng-submit="addProduct()">
                 <div class="form-group">
                     <label for="category_name">Tên danh mục</label>
-                    <input type="text" id="product_name" ng-maxlength="50" required class="form-control" ng-change="getSeoTitle()" name="name" ng-model="product.Name" placeholder="Tên danh mục...">
+                    <input type="text" id="product_name" ng-maxlength="100" required class="form-control" ng-change="getSeoTitle()" name="name" ng-model="product.Name" placeholder="Tên danh mục...">
                     <em class="text-danger" ng-show="frmAddProduct.name.$error.required">Phải nhập tên danh mục</em>
-                    <em class="text-danger" ng-show="frmAddProduct.name.$error.maxlength">Tối đa 50 ký tự</em>
+                    <em class="text-danger" ng-show="frmAddProduct.name.$error.maxlength">Tối đa 100 ký tự</em>
                 </div>
                 <div class="form-group">
                     <label for="product_alias">Tiêu đề seo</label>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="form-group">
                     <label for="product_display_order">Đường dẫn file</label>
-                    <input type="text" class="form-control" id="product_link" name="link" ng-model="product.Link">
+                    <textarea ckeditor="ckeditorOptions" type="text" class="form-control" id="product_link" name="link" ng-model="product.Link"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="product_display_order">Tags</label>

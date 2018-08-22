@@ -1,44 +1,55 @@
-﻿using System;
-using System.Reflection;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Mvc;
-using Autofac;
+﻿using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using Converging.Data;
 using Converging.Data.Infrastructure;
 using Converging.Data.Repositories;
+using Converging.Model.Models;
 using Converging.Service;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.DataProtection;
 using Owin;
+using System.Reflection;
+using System.Web;
+using System.Web.Http;
+using System.Web.Mvc;
 
 [assembly: OwinStartup(typeof(Converging.App_Start.Startup))]
 
 namespace Converging.App_Start
 {
-    public class Startup
+    public partial class Startup
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigAutoFac(app);
+            // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=316888
+            ConfigAutofac(app);
+            ConfigureAuth(app);
         }
-
-        private void ConfigAutoFac(IAppBuilder app)
+        private void ConfigAutofac(IAppBuilder app)
         {
             var builder = new ContainerBuilder();
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
-
-            // register your api web controller
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            // Register your Web API controllers.
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly()); //Register WebApi Controllers
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
-            builder.RegisterType<ConveringDbContext>().AsSelf().InstancePerRequest();
+
+            builder.RegisterType<ConvergingDbContext>().AsSelf().InstancePerRequest();
+
+            //Asp.net Identity
+            builder.RegisterType<ApplicationUserStore>().As<IUserStore<ApplicationUser>>().InstancePerRequest();
+            builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
+            builder.RegisterType<ApplicationSignInManager>().AsSelf().InstancePerRequest();
+            builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
+            builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
+
 
             // Repositories
             builder.RegisterAssemblyTypes(typeof(ProductCategoryRepository).Assembly)
-                .Where(pc => pc.Name.EndsWith("Repository"))
+                .Where(t => t.Name.EndsWith("Repository"))
                 .AsImplementedInterfaces().InstancePerRequest();
 
             // Services
@@ -46,11 +57,12 @@ namespace Converging.App_Start
                .Where(t => t.Name.EndsWith("Service"))
                .AsImplementedInterfaces().InstancePerRequest();
 
+
             Autofac.IContainer container = builder.Build();
-            // set register which is added
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver((IContainer)container); //Set the WebApi DependencyResolver
+
         }
     }
 }

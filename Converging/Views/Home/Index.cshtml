@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div id="hotProduct">
+        <button class="btn btn-primary">Danh sách nổi bật</button>
+        <div class="row">
+            @foreach (var product in ViewBag.HotProductVMList)
+            {
+                var url = "/San-pham/" + product.Alias + "/" + product.ID;
+                <div class="col-md-3" title="@product.Name">
+                    <div class="card">
+                        <a href="@url"><img class="card-img-top" src="https://images.unsplash.com/photo-1517303650219-83c8b1788c4c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bd4c162d27ea317ff8c67255e955e3c8&auto=format&fit=crop&w=2691&q=80" alt="Card image cap"></a>
+                        <div class="card-body">
+                            <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="card-text col-md-12">
+                                <a href="@url">@product.ID + ": " + @product.Name</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div id="showHomeProduct">
+        <button class="btn btn-primary">Danh sách chung</button>
+        <div class="row">
+            @foreach (var product in ViewBag.ShowHomeProductVMList)
+            {
+                var url = "/San-pham/" + product.Alias + "/" + product.ID;
+                <div class="col-md-3" title="@product.Name">
+                    <div class="card">
+                        <a href="@url"><img class="card-img-top" src="https://images.unsplash.com/photo-1517303650219-83c8b1788c4c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bd4c162d27ea317ff8c67255e955e3c8&auto=format&fit=crop&w=2691&q=80" alt="Card image cap"></a>
+                        <div class="card-body">
+                            <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="card-text col-md-12">
+                                <a href="@url">@product.ID + ": " + @product.Name</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

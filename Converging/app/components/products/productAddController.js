@@ -80,7 +80,7 @@
         }
 
         function loadListsCategory() {
-            apiService.get("/api/productcategory/getall", null, function (result) {
+            apiService.get("/api/productcategory/getallparentswithoutnochild", null, function (result) {
                 $scope.categories = result.data;
             }, function () {
                 console.log('Can not get list category')

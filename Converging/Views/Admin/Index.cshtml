@@ -11,10 +11,11 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Purple Admin</title>
+    <title>Converging Admin</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="/Assets/Admin/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/Assets/Admin/vendors/css/vendor.bundle.base.css">
+    <link href="~/content/loading-bar.min.css" rel="stylesheet" />
     <!-- endinject -->
     <!-- plugin css for this page -->
     <!-- End plugin css for this page -->
@@ -52,21 +53,25 @@
     <script src="~/Assets/Admin/ckeditor/ckeditor.js"></script>
     <script src="~/Assets/Admin/ng-ckeditor/ng-ckeditor.js"></script>
     <script src="~/Assets/Admin/ckfinder/ckfinder.js"></script>
+    <script src="~/Scripts/loading-bar.min.js"></script>
+    <script src="~/Scripts/angular-local-storage.min.js"></script>
+    <script src="~/Scripts/underscore.js"></script>
+
     <script src="~/app/shared/modules/converging.common.js"></script>
-
     <script src="~/app/shared/filters/statusFilter.js"></script>
-
     <script src="~/app/shared/serivces/apiService.js"></script>
     <script src="~/app/shared/serivces/notificationService.js"></script>
-    <script src="~/app/shared/serivces/commonService.js"></script>
-
     <script src="~/app/shared/directives/pagerDirective.js"></script>
-
-    <script src="~/app/components/product_categories/productCategories.module.js"></script>
-    <script src="~/app/components/products/products.module.js"></script>
+    <script src="~/app/shared/serivces/commonService.js"></script>
+    <script src="~/app/shared/serivces/authData.js"></script>
+    <script src="~/app/shared/serivces/authenticationService.js"></script>
+    <script src="~/app/shared/serivces/loginService.js"></script>
 
     <script src="~/app/app.js"></script>
     <script src="~/app/components/home/rootController.js"></script>
+
+    <script src="~/app/components/product_categories/productCategories.module.js"></script>
+    <script src="~/app/components/products/products.module.js"></script>
 
     <script src="~/app/components/home/homeController.js"></script>
     <script src="~/app/components/login/loginController.js"></script>

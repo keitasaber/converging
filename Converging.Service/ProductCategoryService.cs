@@ -23,6 +23,8 @@ namespace Converging.Service
 
         IEnumerable<ProductCategory> GetAllByParentId(int parentId);
 
+        IEnumerable<ProductCategory> GetAllParentsWithoutNoChild();
+
         ProductCategory GetById(int id);
 
         void Save();
@@ -81,5 +83,15 @@ namespace Converging.Service
             _unitOfWork.Commit();
         }
 
+        public IEnumerable<ProductCategory> GetAllParentsWithoutNoChild()
+        {
+            var childCategoryList = _productCategoryRepository.GetMulti(x => x.ParentID != null);
+            var categoryList = _productCategoryRepository.GetAll();
+            foreach (var childCategory in childCategoryList)
+            {
+                categoryList = categoryList.Where(x => x.ID != childCategory.ParentID);
+            }
+            return categoryList;
+        }
     }
 }

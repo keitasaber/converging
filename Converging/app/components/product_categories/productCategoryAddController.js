@@ -10,7 +10,6 @@
             Name: "Tên Danh mục",
             Alias: "ten-danh-muc"
         }
-
         $scope.parentCategories = [];
 
         $scope.getSeoTitle = getSeoTitle;

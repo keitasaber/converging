@@ -9,14 +9,14 @@ namespace Converging.Data.Infrastructure
     public class UnitOfWork : IUnitOfWork
     {
         private readonly IDbFactory dbFactory;
-        private ConveringDbContext dbContext;
+        private ConvergingDbContext dbContext;
 
         public UnitOfWork(IDbFactory dbFactory)
         {
             this.dbFactory = dbFactory;
         }
 
-        public ConveringDbContext DbContext
+        public ConvergingDbContext DbContext
         {
             get { return dbContext ?? (dbContext = dbFactory.Init()); }
         }

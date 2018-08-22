@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Converging.Model.Models
 {
     [Table("Menus")]
-    public class Menu : SameAtribute
+    public class Menu
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

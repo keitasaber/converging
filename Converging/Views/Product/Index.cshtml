@@ -1,0 +1,61 @@
+﻿@model Converging.Models.ProductViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/danh-muc-san-pham/@ViewBag.ProductCategory.Alias/@ViewBag.ProductCategory.ID">@ViewBag.ProductCategory.Name</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+        </ol>
+    </nav>
+    <h3>
+        @Model.Name
+    </h3>
+    <div class="row">
+        <div class="col-md-9">
+            <!-- Tabs with icons on Card -->
+            <div class="card card-nav-tabs">
+                <div class="card-header card-header-primary">
+                    <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <ul class="nav nav-tabs" data-tabs="tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active show" href="#profile" data-toggle="tab">
+                                        <i class="material-icons">toc</i> Giới thiệu
+                                        <div class="ripple-container"></div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#messages" data-toggle="tab">
+                                        <i class="material-icons">cloud_download</i> Tải xuống
+                                        <div class="ripple-container"></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body ">
+                    <div class="tab-content text-center">
+                        <div class="tab-pane active show" id="profile">
+                            @Html.Raw(Model.Content)
+                        </div>
+                        <div class="tab-pane" id="messages">
+                            @Html.Raw(Model.Link)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Tabs with icons on Card -->
+        </div>
+        <div class="col-md-3">
+            Quảng cáo
+        </div>
+    </div>
+</div>
+

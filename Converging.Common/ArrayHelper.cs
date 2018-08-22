@@ -25,5 +25,14 @@ namespace Converging.Common
             else
                 return true;
         }
+
+        public static IEnumerable<IEnumerable<T>> SplitList<T>(IEnumerable<T> locations, int nSize = 30)
+        {
+            var list = locations.ToList();
+            for (int i = 0; i < list.Count; i += nSize)
+            {
+                yield return list.GetRange(i, Math.Min(nSize, list.Count - i));
+            }
+        }
     }
 }

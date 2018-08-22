@@ -19,6 +19,7 @@ namespace Converging.Mappings
                 config.CreateMap<ProductCategory, ProductCategoryViewModel>();
                 config.CreateMap<Tag, TagViewModel>();
                 config.CreateMap<ProductTag, ProductTagViewModel>();
+                config.CreateMap<Footer, FooterViewModel>();
             }).CreateMapper();
         }
     }

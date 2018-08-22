@@ -15,6 +15,7 @@ using System.Web.Script.Serialization;
 namespace Converging.Api
 {
     [RoutePrefix("api/productcategory")]
+    [Authorize]
     public class ProductCategoryController : ApiControllerBase
     {
         private IProductCategoryService _productCategoryService;
@@ -73,6 +74,21 @@ namespace Converging.Api
             return CreateHttpResponse(requestMessage, () =>
             {
                 var model = _productCategoryService.GetAll();
+
+                var listProductCategoryViewModel = AutoMapperConfiguration.Mapping.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(model);
+                HttpResponseMessage responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, listProductCategoryViewModel);
+
+                return responseMessage;
+            });
+        }
+
+        [Route("getallparentswithoutnochild")]
+        [HttpGet]
+        public HttpResponseMessage GetParentsWithoutNoChild(HttpRequestMessage requestMessage)
+        {
+            return CreateHttpResponse(requestMessage, () =>
+            {
+                var model = _productCategoryService.GetAllParentsWithoutNoChild();
 
                 var listProductCategoryViewModel = AutoMapperConfiguration.Mapping.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(model);
                 HttpResponseMessage responseMessage = requestMessage.CreateResponse(HttpStatusCode.OK, listProductCategoryViewModel);

@@ -8,7 +8,7 @@ namespace Converging.Data.Infrastructure
 {
     public class DbFactory : IDbFactory
     {
-        private ConveringDbContext dbContext;
+        private ConvergingDbContext dbContext;
 
         public void Dispose()
         {
@@ -18,9 +18,9 @@ namespace Converging.Data.Infrastructure
             }
         }
 
-        public ConveringDbContext Init()
+        public ConvergingDbContext Init()
         {
-            return dbContext ?? (dbContext = new ConveringDbContext());
+            return dbContext ?? (dbContext = new ConvergingDbContext());
         }
     }
 }

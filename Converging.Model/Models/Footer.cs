@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Converging.Model.Models
 {
     [Table("Footers")]
-    public class Footer : SameAtribute
+    public class Footer
     {
         [Key]
         [MaxLength(50)]

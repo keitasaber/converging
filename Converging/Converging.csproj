@@ -69,12 +69,30 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -187,14 +205,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\AccountController.cs" />
+    <Compile Include="Api\HomeController.cs" />
     <Compile Include="Api\ProductCategoryController.cs" />
     <Compile Include="Api\ProductController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductCategoryController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -202,6 +227,7 @@
     <Compile Include="Infrastructure\Core\PaginationSet.cs" />
     <Compile Include="Infrastructure\Extentions\EntityExtentions.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
+    <Compile Include="Models\FooterViewModel.cs" />
     <Compile Include="Models\ProductCategoryViewModel.cs" />
     <Compile Include="Models\ProductTagViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
@@ -212,6 +238,7 @@
     <Content Include="app\app.js" />
     <Content Include="app\components\home\homeController.js" />
     <Content Include="app\components\home\homeView.html" />
+    <Content Include="app\components\home\rootController.js" />
     <Content Include="app\components\login\loginController.js" />
     <Content Include="app\components\login\loginView.html" />
     <Content Include="app\components\products\products.module.js" />
@@ -232,7 +259,10 @@
     <Content Include="app\shared\directives\pagerDirective.js" />
     <Content Include="app\shared\filters\statusFilter.js" />
     <Content Include="app\shared\serivces\apiService.js" />
+    <Content Include="app\shared\serivces\authData.js" />
+    <Content Include="app\shared\serivces\authenticationService.js" />
     <Content Include="app\shared\serivces\commonService.js" />
+    <Content Include="app\shared\serivces\loginService.js" />
     <Content Include="app\shared\serivces\notificationService.js" />
     <Content Include="app\shared\views\baseView.html" />
     <Content Include="Assets\Admin\ckeditor\adapters\jquery.js" />
@@ -1363,10 +1393,55 @@
     <Content Include="Assets\Admin\vendors\iconfonts\mdi\preview.html" />
     <Content Include="Assets\Admin\vendors\js\vendor.bundle.addons.js" />
     <Content Include="Assets\Admin\vendors\js\vendor.bundle.base.js" />
+    <Content Include="Assets\Client\css\material-kit.css" />
+    <Content Include="Assets\Client\css\material-kit.min.css" />
+    <Content Include="Assets\Client\demo\demo.css" />
+    <Content Include="Assets\Client\img\apple-icon.png" />
+    <Content Include="Assets\Client\img\bg.jpg" />
+    <Content Include="Assets\Client\img\bg2.jpg" />
+    <Content Include="Assets\Client\img\bg3.jpg" />
+    <Content Include="Assets\Client\img\bg7.jpg" />
+    <Content Include="Assets\Client\img\city-profile.jpg" />
+    <Content Include="Assets\Client\img\city.jpg" />
+    <Content Include="Assets\Client\img\examples\clem-onojegaw.jpg" />
+    <Content Include="Assets\Client\img\examples\clem-onojeghuo.jpg" />
+    <Content Include="Assets\Client\img\examples\cynthia-del-rio.jpg" />
+    <Content Include="Assets\Client\img\examples\mariya-georgieva.jpg" />
+    <Content Include="Assets\Client\img\examples\olu-eletu.jpg" />
+    <Content Include="Assets\Client\img\examples\studio-1.jpg" />
+    <Content Include="Assets\Client\img\examples\studio-2.jpg" />
+    <Content Include="Assets\Client\img\examples\studio-3.jpg" />
+    <Content Include="Assets\Client\img\examples\studio-4.jpg" />
+    <Content Include="Assets\Client\img\examples\studio-5.jpg" />
+    <Content Include="Assets\Client\img\faces\avatar.jpg" />
+    <Content Include="Assets\Client\img\faces\camp.jpg" />
+    <Content Include="Assets\Client\img\faces\card-profile1-square.jpg" />
+    <Content Include="Assets\Client\img\faces\card-profile2-square.jpg" />
+    <Content Include="Assets\Client\img\faces\card-profile4-square.jpg" />
+    <Content Include="Assets\Client\img\faces\card-profile5-square.jpg" />
+    <Content Include="Assets\Client\img\faces\card-profile6-square.jpg" />
+    <Content Include="Assets\Client\img\faces\christian.jpg" />
+    <Content Include="Assets\Client\img\faces\kendall.jpg" />
+    <Content Include="Assets\Client\img\faces\marc.jpg" />
+    <Content Include="Assets\Client\img\favicon.png" />
+    <Content Include="Assets\Client\img\landing.jpg" />
+    <Content Include="Assets\Client\img\profile.jpg" />
+    <Content Include="Assets\Client\img\profile_city.jpg" />
+    <Content Include="Assets\Client\js\core\bootstrap-material-design.min.js" />
+    <Content Include="Assets\Client\js\core\jquery.min.js" />
+    <Content Include="Assets\Client\js\core\popper.min.js" />
+    <Content Include="Assets\Client\js\material-kit.js" />
+    <Content Include="Assets\Client\js\material-kit.min.js" />
+    <Content Include="Assets\Client\js\plugins\bootstrap-datetimepicker.js" />
+    <Content Include="Assets\Client\js\plugins\jquery.sharrre.js" />
+    <Content Include="Assets\Client\js\plugins\moment.min.js" />
+    <Content Include="Assets\Client\js\plugins\nouislider.min.js" />
     <Content Include="content\bootstrap-theme.css" />
     <Content Include="content\bootstrap-theme.min.css" />
     <Content Include="content\bootstrap.css" />
     <Content Include="content\bootstrap.min.css" />
+    <Content Include="content\loading-bar.css" />
+    <Content Include="content\loading-bar.min.css" />
     <Content Include="content\toastr.css" />
     <Content Include="content\toastr.min.css" />
     <Content Include="favicon.ico" />
@@ -1376,6 +1451,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Libs\CKFinder.dll" />
+    <Content Include="Scripts\angular-local-storage.js" />
+    <Content Include="Scripts\angular-local-storage.min.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
@@ -1419,8 +1496,11 @@
     <Content Include="Assets\Admin\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Assets\Admin\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Assets\Admin\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Assets\Client\css\material-kit.css.map" />
+    <Content Include="Assets\Client\js\material-kit.js.map" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <Content Include="Scripts\angular-local-storage.min.js.map" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
@@ -1428,12 +1508,16 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.0.js" />
     <Content Include="Scripts\jquery-1.9.0.min.js" />
+    <Content Include="Scripts\loading-bar.js" />
+    <Content Include="Scripts\loading-bar.min.js" />
     <Content Include="Scripts\ngBootbox.js" />
     <Content Include="Scripts\ngBootbox.min.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\ui-router.js" />
     <Content Include="Scripts\ui-router.min.js" />
+    <Content Include="Scripts\underscore.js" />
+    <Content Include="Scripts\underscore.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1443,10 +1527,17 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Scripts\underscore.min.map" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\Shared\Header.cshtml" />
+    <Content Include="Views\Shared\ProductCategory.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\ProductCategory\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Assets\Client\" />
     <Folder Include="UploadedFiles\" />
   </ItemGroup>
   <ItemGroup>

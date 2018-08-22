@@ -16,6 +16,7 @@ using System.Web.Script.Serialization;
 namespace Converging.Api
 {
     [RoutePrefix("api/product")]
+    [Authorize]
     public class ProductController : ApiControllerBase
     {
         private IProductService _productService;

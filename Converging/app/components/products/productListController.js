@@ -78,7 +78,7 @@
         }
 
         function search() {
-            getProductCategories();
+            getProducts();
         }
 
         function getProducts(page) {
@@ -101,7 +101,7 @@
                 $scope.pagesCount = result.data.TotalPages;
                 $scope.totalCount = result.data.TotalCount;
             }, function () {
-                console.log('Load list product fail');
+                notificationService.displayError("Có lỗi xảy ra");
             });
         }
         $scope.getProducts();

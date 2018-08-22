@@ -101,7 +101,7 @@
                 $scope.pagesCount = result.data.TotalPages;
                 $scope.totalCount = result.data.TotalCount;
             }, function () {
-                console.log('Load list product category fail');
+                notificationService.displayError("Có lỗi xảy ra!");
             });
         }
         $scope.getProductCategories();

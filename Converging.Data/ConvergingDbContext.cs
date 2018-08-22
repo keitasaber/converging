@@ -1,4 +1,5 @@
 ﻿using Converging.Model.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Converging.Data
 {
-    public class ConveringDbContext : DbContext
+    public class ConvergingDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ConveringDbContext() : base("ConvergingConnection")
+        public ConvergingDbContext() : base("ConvergingConnection")
         {
             this.Configuration.LazyLoadingEnabled = false;
         }
@@ -30,8 +31,15 @@ namespace Converging.Data
         public DbSet<VisitorStatistic> VisitorStatistics { set; get; }
         public DbSet<Error> Errors { set; get; }
 
+        public static ConvergingDbContext Create()
+        {
+            return new ConvergingDbContext();
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId });
+            modelBuilder.Entity<IdentityUserLogin>().HasKey(i => i.UserId);
         }
     }
 }

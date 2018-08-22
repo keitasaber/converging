@@ -8,6 +8,6 @@ namespace Converging.Data.Infrastructure
 {
     public interface IDbFactory : IDisposable
     {
-        ConveringDbContext Init();
+        ConvergingDbContext Init();
     }
 }
